@@ -94,7 +94,9 @@ else
   fi
 
   if [[ -n "${VSCODE_CLI_TARGET}" ]]; then
-    rustup target add "${VSCODE_CLI_TARGET}"
+    if command -v rustup &> /dev/null; then
+      rustup target add "${VSCODE_CLI_TARGET}"
+    fi
 
     cargo build --release --target "${VSCODE_CLI_TARGET}" --bin=code
 
